@@ -6,16 +6,22 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 # Orchestrate or schedule a set of jobs
 jobs:
-  print_hello:
+  create_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo hello
-  print_world:
+      - run: echo "this file shall be shared" > output.txt
+    persist_to_workspace:
+      root: /tmp/workspace
+      paths:
+        - shared/output.txt
+  print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run: echo $var1
+      - attach_workspace: 
+        at: /tmp/workspace
 workflows:
   # Name the workflow "welcome"
   welcome:
