@@ -10,18 +10,18 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "this file shall be shared" > output.txt
+      - run: echo "this file shall be shared" > ~/output.txt
     persist_to_workspace:
-      root: /tmp/workspace
+      root: ~/
       paths:
-        - shared/output.txt
+        - output.txt
   print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run: echo $var1
       - attach_workspace: 
-        at: /tmp/workspace
+        at: ~/
 workflows:
   # Name the workflow "welcome"
   welcome:
