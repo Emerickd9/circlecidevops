@@ -33,4 +33,4 @@ workflows:
     jobs:
       - say-hello:
       - getting-started:
-          requires: [say-helo]
+          requires: [say-hello]
